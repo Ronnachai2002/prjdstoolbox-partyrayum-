@@ -1,0 +1,94 @@
+nav a {
+    color: #333; /* สีของลิงค์ */
+    text-decoration: none; /* เอฟเฟกต์ของการเชื่อมโยง */
+    margin-right: 10px; /* ระยะห่างของลิงค์ */
+}
+
+/* สไตล์ของลิงค์ใน Navbar เมื่อโฮเวอร์ */
+nav a:hover {
+    color: #555; /* สีของลิงค์เมื่อโฮเวอร์ */
+}
+
+/* สไตล์ของปุ่มใน Navbar */
+nav button {
+    background-color: #0084ff; /* สีพื้นหลังของปุ่ม */
+    color: #fff; /* สีของตัวอักษรของปุ่ม */
+    border: none; /* ขอบของปุ่ม */
+    padding: 8px 16px; /* ขนาดของปุ่ม */
+    border-radius: 5px; /* ทำให้มุมของปุ่มโค้ง */
+    cursor: pointer; /* เมาส์เป็นลูกศรเมื่อโฮเวอร์ */
+}
+
+/* สไตล์ของปุ่มใน Navbar เมื่อโฮเวอร์ */
+nav button:hover {
+    background-color: #0056b3; /* สีพื้นหลังของปุ่มเมื่อโฮเวอร์ */
+}
+
+#chat-container {
+    display: flex;
+    flex-direction: column-reverse; /* Stack items vertically in reverse order */
+    margin: 25px ; /* Center the container horizontally */
+    max-width: 270px; /* Set a maximum width */
+    width: 100%; /* Ensure the container takes full width within the maximum width */
+    padding: 0 20px; /* Add some padding */
+}
+
+.chat-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px; /* Adjust margin for spacing between items */
+}
+
+
+
+
+
+/* สไตล์ของกล่องข้อความ */
+#messages {
+    overflow-y: auto; /* เพื่อสร้างการเลื่อนเมื่อเกิดการส่งข้อความเพิ่ม */
+    height: 300px; /* ความสูงของกล่องข้อความ */
+    padding: 10px; /* ระยะห่างของเนื้อหาภายในกล่อง */
+    border-bottom: 1px solid #ddd; /* เส้นขอบด้านล่างของกล่องข้อความ */
+}
+
+
+
+/* สไตล์ของฟอร์มการส่งข้อความ */
+form {
+    margin-top: 20px; /* ระยะห่างด้านบนของฟอร์ม */
+}
+
+/* สไตล์ของช่องข้อความ */
+input[type='text'] {
+    width: 80%; /* ความกว้างของช่องข้อความ */
+    padding: 8px; /* ขนาดของช่องข้อความ */
+    border: 1px solid #ddd; /* เส้นขอบของช่องข้อความ */
+    border-radius: 5px; /* ทำให้มุมของช่องข้อความโค้ง */
+    margin-right: 10px; /* ระยะห่างของช่องข้อความ */
+}
+
+/* สไตล์ของปุ่มส่งข้อความ */
+button[type='submit'] {
+    background-color: #0084ff; /* สีพื้นหลังของปุ่ม */
+    color: #fff; /* สีของตัวอักษรของปุ่ม */
+    border: none; /* ขอบของปุ่ม */
+    padding: 8px 16px; /* ขนาดของปุ่ม */
+    border-radius: 5px; /* ทำให้มุมของปุ่มโค้ง */
+    cursor: pointer; /* เมาส์เป็นลูกศรเมื่อโฮเวอร์ */
+}
+
+/* สไตล์ของปุ่มส่งข้อความเมื่อโฮเวอร์ */
+button[type='submit']:hover {
+    background-color: #0056b3; /* สีพื้นหลังของปุ่มเมื่อโฮเวอร์ */
+}
+
+#chat-display {
+    display: none; /* เริ่มต้นให้ช่องแสดงแชทซ่อนไว้ */
+    /* สไตล์อื่น ๆ ของช่องแสดงแชท */
+}
+
+.show-chat #chat-display {
+    display: block; /* เมื่อมีคลิกแสดงแชท */
+}
