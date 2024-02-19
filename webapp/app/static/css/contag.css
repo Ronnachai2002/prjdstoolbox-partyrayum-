@@ -1,0 +1,107 @@
+.box {
+    width: 1016px;
+    height: 806px;
+}
+
+.box .group {
+    position: fixed;
+    width: 1026px;
+    height: 806px;
+    top: 0;
+    left: 0;
+}
+
+.box .overlap-group {
+    position: relative;
+    width: 1016px;
+    height: 806px;
+}
+
+.box .rectangle {
+    position: absolute;
+    width: 1014px;
+    height: 806px;
+    top: 0;
+    left: 2px;
+    background-color: #ffffff;
+    border-radius: 51px;
+}
+
+.box .img {
+    position: absolute;
+    width: 712px;
+    height: 352px;
+    top: 403px;
+    left: 139px;
+    object-fit: cover;
+}
+
+.box .text-wrapper {
+    position: absolute;
+    top: 224px;
+    left: 139px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.box .div {
+    position: absolute;
+    top: 279px;
+    left: 139px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.box .text-wrapper-2 {
+    top: 136px;
+    left: 139px;
+    font-size: 28px;
+    position: absolute;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.box .text-wrapper-3 {
+    position: absolute;
+    top: 334px;
+    left: 139px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.box .line {
+    position: absolute;
+    width: 1016px;
+    height: 1px;
+    top: 102px;
+    left: 0;
+    object-fit: cover;
+}
+
+.box .text-wrapper-4 {
+    top: 28px;
+    left: 63px;
+    font-size: 30px;
+    white-space: nowrap;
+    position: absolute;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    letter-spacing: 0;
+    line-height: normal;
+}

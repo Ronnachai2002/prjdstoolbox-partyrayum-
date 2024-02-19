@@ -1,0 +1,100 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: auto;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-container {
+  max-width: 600px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  margin: auto;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff; /* Change color to a blue shade */
+}
+
+.profile-info {
+  font-size: 16px;
+  color: #868e96;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-top: 20px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease; /* Add transition for a smoother hover effect */
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Add some spacing to the date of birth labels and select boxes */
+form label,
+form select {
+  margin-bottom: 10px;
+}
+
+/* Style the text input fields */
+form input {
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Style the back-to-profile button */
+a button {
+  background-color: #6c757d; /* Gray color */
+}
+
+a button:hover {
+  background-color: #495057; /* Darker gray color on hover */
+}
+
+/* Adjust styling for smaller screens */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 15px;
+  }
+}
+
+@keyframes move{
+  0%, 49.99%{
+      opacity: 0;
+      z-index: 1;
+  }
+  50%, 100%{
+      opacity: 1;
+      z-index: 5;
+  }
+}

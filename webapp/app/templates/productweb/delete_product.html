@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Product</title>
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+</head>
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+    <div class="container">
+        {% block content %}
+        <h2>Delete Product</h2>
+        <p>Are you sure you want to delete '{{ product.title }}'?</p>
+        <p class="product-size">Size: {{ product.size }}</p>
+        <p class="product-matter">{{ product.material }}</p>
+        <p class="product-description">{{ product.description }}</p>
+        <p class="product-price">{{ product.price }}</p>
+        <form method="post" id="delete-form">
+            {% csrf_token %}
+            <button type="submit" name="confirm_delete">Delete</button>
+            <a href="{% url 'products' %}" class="cancel-link">Cancel</a>
+        </form>
+    {% endblock %}
+    </div>
+</body>
+</html>

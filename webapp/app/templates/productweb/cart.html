@@ -1,0 +1,68 @@
+{% load static %}
+{% include 'base/tab_login.html' %}
+{% include 'app/components/site_header.html' %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตะกร้าสินค้า</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+</head>
+<div class="cart-container">
+    <script src="{% static 'js/cart1.js' %}"></script>
+    <h2>ตะกร้าสินค้า</h2>
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>สินค้า</th>
+                <th>ราคา</th>
+                <th>จำนวน</th>
+                <th>เลือกที่จะสั่ง</th>
+                <th>การจัดการ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <td>{{ item.itemImages.item.title }}</td>
+                <td>{{ item.itemImages.item.price }}</td>
+                <td>{{ item.amount }}</td>
+                <td><input type="checkbox" name="selected_item" value="{{ item.id }}" onclick="limitCheckboxSelection(this)"></td>
+                <td>
+                    <form action="{% url 'delete_product_incart' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">ลบรายการ</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="cart-total">
+        <a id="checkout-link" href="{% url 'order' %}" onclick="return limitCheckboxSelectionAndSubmit();"><button id="checkout-btn">สั่งซื้อ</button></a>
+    </div>
+    <script>
+        function limitCheckboxSelectionAndSubmit() {
+            var selectedItems = document.querySelectorAll('input[name="selected_item"]:checked');
+    
+            if (selectedItems.length === 1) {
+                var selectedProductName = selectedItems[0].parentNode.parentNode.cells[0].innerText.trim();
+                if (selectedProductName === "ป้ายกล่องไฟ") {
+                    window.location.href = "{% url 'order2' %}";
+                } else if (selectedProductName === "ป้ายสติ๊กเกอร์") {
+                    window.location.href = "{% url 'order3' %}";
+                } else if (selectedProductName === "ป้ายรีดฟิวเจอร์บอร์ด") {
+                    window.location.href = "{% url 'order4' %}";
+                } else if (selectedProductName === "ป้ายอักษรพลาสวูด") {
+                    window.location.href = "{% url 'order5' %}";
+                } else if (selectedProductName === "ป้ายรีดโฟมบอร์ด") {
+                    window.location.href = "{% url 'order6' %}";
+                } else {
+                    window.location.href = "{% url 'order' %}";
+                }
+            } else {
+                alert("Please select only one item to proceed with the order.");
+            }
+            return false; // Prevent default link action
+        }
+    </script>
+</div>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/previews.css' %}">
+</head>
+<body>
+
+<!-- MAIN (Center website) -->
+<div class="main">
+<hr>
+<h2>ผลงานร้าน</h2>
+
+<div id="myBtnContainer">
+  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+  <button class="btn" onclick="filterSelection('P1')"> ป้ายไวนิล</button>
+  <button class="btn" onclick="filterSelection('P2')"> ป้ายสติกเกอร์ตู้ไฟ</button>
+  <button class="btn" onclick="filterSelection('P3')"> ป้ายอักษร</button>
+  <button class="btn" onclick="filterSelection('P4')"> ป้ายสติกเกอร์</button>
+  <button class="btn" onclick="filterSelection('P5')"> ไวนิลพร้อมโครงเหล็กแลธโครงไม้</button>
+</div>
+
+<div class="row">
+  <div class="column P1">
+    <div class="content">
+      <img src="{% static 'media\app\ป้ายไวนิล\114948.jpg' %}"  style="width:100%">
+      <h4>ป้ายไวนิล</h4>
+    </div>
+  </div>
+  <div class="column P1">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายไวนิล\114910_0.jpg' %}" style="width:100%">
+    <h4>ป้ายไวนิล</h4>
+    </div>
+  </div>
+  <div class="column P1">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายไวนิล\114949.jpg' %}" style="width:100%">
+    <h4>ป้ายไวนิล</h4>
+    </div>
+  </div>
+  <div class="column P1">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายไวนิล\114982_0.jpg' %}" style="width:100%">
+    <h4>ป้ายไวนิล</h4>
+    </div>
+  </div>
+  
+  <div class="column P2">
+    <div class="content">
+      <img src="{% static 'media\app\ป้ายสติกเกอร์ตู้ไฟ\114920_0.jpg' %}" style="width:100%">
+      <h4>ป้ายสติกเกอร์ตู้ไฟ</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P2">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายสติกเกอร์ตู้ไฟ\114939.jpg' %}" style="width:100%">
+      <h4>ป้ายสติกเกอร์ตู้ไฟ</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P2">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายสติกเกอร์ตู้ไฟ\114940.jpg' %}"  style="width:100%">
+      <h4>ป้ายสติกเกอร์ตู้ไฟ</h4>
+      <p>..</p>
+    </div>
+  </div>
+
+  <div class="column P3">
+    <div class="content">
+      <img src="{% static 'media\app\ป้ายอักษร\114841.jpg' %}" style="width:100%">
+      <h4>ป้ายอักษร</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P3">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายอักษร\114871.jpg' %}"  style="width:100%">
+      <h4>ป้ายอักษร</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P3">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายอักษร\114873.jpg' %}"  style="width:100%">
+      <h4>ป้ายอักษร</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P4">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายสติกเกอร์\114929_0.jpg' %}"  style="width:100%">
+      <h4>ป้ายสติกเกอร์</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P4">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายสติกเกอร์\114955.jpg' %}"  style="width:100%">
+      <h4>ป้ายสติกเกอร์</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P4">
+    <div class="content">
+    <img src="{% static 'media\app\ป้ายสติกเกอร์\114959.jpg' %}"  style="width:100%">
+      <h4>ป้ายสติกเกอร์</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P5">
+    <div class="content">
+    <img src="{% static 'media\app\ไวนิลพร้อมโครงเหล็กแลธโครงไม้\114902_0.jpg' %}"  style="width:100%">
+      <h4>ไวนิลพร้อมโครงเหล็กแลธโครงไม้</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P5">
+    <div class="content">
+    <img src="{% static 'media\app\ไวนิลพร้อมโครงเหล็กแลธโครงไม้\114909_0.jpg' %}"  style="width:100%">
+      <h4>ไวนิลพร้อมโครงเหล็กแลธโครงไม้</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P5">
+    <div class="content">
+    <img src="{% static 'media\app\ไวนิลพร้อมโครงเหล็กแลธโครงไม้\114922.jpg' %}"  style="width:100%">
+      <h4>ไวนิลพร้อมโครงเหล็กแลธโครงไม้</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P5">
+    <div class="content">
+    <img src="{% static 'media\app\ไวนิลพร้อมโครงเหล็กแลธโครงไม้\114938.jpg' %}"  style="width:100%">
+      <h4>ไวนิลพร้อมโครงเหล็กแลธโครงไม้</h4>
+      <p>..</p>
+    </div>
+  </div>
+  <div class="column P5">
+    <div class="content">
+    <img src="{% static 'media\app\ไวนิลพร้อมโครงเหล็กแลธโครงไม้\114921.jpg' %}"  style="width:100%">
+      <h4>ไวนิลพร้อมโครงเหล็กแลธโครงไม้</h4>
+      <p>..</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+  filterSelection("all");
+  
+  function filterSelection(c) {
+    var x, i;
+    x = document.getElementsByClassName("column");
+    if (c == "all") c = "";
+    for (i = 0; i < x.length; i++) {
+      w3RemoveClass(x[i], "show");
+      if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+    }
+    // Update active button
+    var btnContainer = document.getElementById("myBtnContainer");
+    var btns = btnContainer.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      if (btns[i].classList.contains("active")) {
+        btns[i].classList.remove("active");
+      }
+    }
+    document.querySelector('[onclick="filterSelection(\'' + c + '\')"]').classList.add("active");
+  }
+
+  function w3AddClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+    }
+  }
+
+  function w3RemoveClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      while (arr1.indexOf(arr2[i]) > -1) {
+        arr1.splice(arr1.indexOf(arr2[i]), 1);     
+      }
+    }
+    element.className = arr1.join(" ");
+  }
+</script>
+
+
+</body>
+</html>

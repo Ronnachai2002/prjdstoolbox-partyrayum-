@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>contag</title>
+  <link rel="stylesheet" href="{% static 'css/contag1.css' %}">
+</head>
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+  <div class="container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.8808659807587!2d105.01252527585248!3d14.491527785981965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3111559c1f15bdfd%3A0x5d1486ec4655e8b6!2z4LiZ4LmJ4Liz4Lii4Li34LiZ4LiB4Lij4Liy4Lif4Lif4Li04LiE!5e0!3m2!1sth!2sth!4v1707293881535!5m2!1sth!2sth" width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="contact-info">
+      <p><strong>Line ID:</strong> <span class="line-id">@wasdwadsawds</span></p>
+      <p><strong>โทรศัพท์:</strong> <span class="phone-number">0981234567</span></p>
+      <p><strong>ชื่อร้าน:</strong> ร้านบุญตา</p>
+      <p><strong>Email:</strong> <a href="mailto:wasd@gmail.com" class="email">wasd@gmail.com</a></p>
+    </div>
+  </div>
+
+</body>
+
+</html>

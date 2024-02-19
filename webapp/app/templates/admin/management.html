@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="{% static 'css/adminpage.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">หน้าหลัก</a>
+        <a href="{% url 'management' %}">จัดการผู้ใช้</a>
+        <a href="{% url 'admin_order_list' %}">รายการ Order</a>
+        <a href="#"><button>กล่องข้อความ</button></a>
+    </nav>
+    <br>
+    <a href="{% url 'user_management' %}">User Management</a>
+    
+    <table>
+
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_profile in user_profiles %}
+                <tr>
+                    <td>{{ user_profile.user.username }}</td>
+                    <td>{{ user_profile.email }}</td>
+                    <td>{{ user_profile.first_name }}</td>
+                    <td>{{ user_profile.last_name }}</td>
+                    <td>
+                        <a href="{% url 'user_management' %}">User Management</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

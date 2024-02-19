@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประวัติส่วนตัว</title>
+    <link rel="stylesheet" href="{% static 'css\profile.css' %}">
+</head>
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+
+    <br>
+    {% block content %}
+    <div class="profile-container">
+        {% if user.userprofile.profile_image %}
+            <img class="profile-image" src="{{ user.userprofile.profile_image.url }}" alt="Profile Image">
+        {% else %}
+        <img class="profile-image" src="{% static 'path/to/default/profile/image.jpg' %}" alt="Default Profile Image">
+        {% endif %}
+        <h2>โปรไฟล์ของ {{ user.username }}</h2>
+        <p>ชื่อ: {{ user.userprofile.first_name }}</p>
+        <p>นามสกุล: {{ user.userprofile.last_name }}</p>
+        <p>อีเมล: {{ user.email }}</p>
+        <p>เบอร์โทรศัพท์: {{ user.userprofile.phone_number }}</p>
+        <p>ที่อยู่: {{ user.userprofile.address }}</p>
+        <p>วันเกิด: {{ user.userprofile.birth_date }}</p>
+        <form method="post" enctype="multipart/form-data" action="{% url 'upload_profile_image' %}">
+            {% csrf_token %}
+            <input type="file" name="profile_image" accept="image/*">
+            <button type="submit">อัพโหลดโปรไฟล์</button>
+        </form>
+        <br>
+        <a href="{% url 'edit_profile' %}"><button>แก้ไขประวัติ</button></a>
+    </div>
+{% endblock %}
+    </div>
+</body>
+</html>

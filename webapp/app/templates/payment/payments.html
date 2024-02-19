@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>contag</title>
+  <link rel="stylesheet" href="{% static 'css/pay.css' %}">
+</head>
+
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+  <div class="container">
+    <div class="contact-info">
+        <img src="https://www.gsb.or.th/gsb-theme/images/Sharing_Default.jpg" alt="รูปภาพ">
+      <p><strong>บัญชีธนาคาร:</strong> <span class="line-id">020005553350</span></p>
+      <p><strong>หมายเหตุ:</strong> <span class="context">ราคาสินค้าท่านจะได้รับหลังจากช่างทำการผลิตป้ายตามสั่งเสร็จแล้ว</span></p>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

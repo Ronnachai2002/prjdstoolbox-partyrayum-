@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/vieworder3.css' %}">
+</head>
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+    <div class="container">
+        <a href="{% url 'preorder' %}" class="back-button">&#8592; ย้อนกลับ</a>
+        <div class="box">
+            <h1>รายละเอียดคำสั่งซื้อ</h1>
+            <p><strong>เลขคำสั่งซื้อ:</strong> {{ order.id }}</p>
+            <p><strong>เวลาสั่งซื้อ:</strong> {{ order.created_at }}</p>
+            <p><strong>ชื่อผู้สั่ง:</strong> {{ order.user_profile.first_name }} {{ order.user_profile.last_name }}</p>
+            <p><strong>เบอร์โทรศัพท์:</strong> {{ order.user_profile.phone_number }}</p>
+            <p><strong>ที่อยู่:</strong> {{ order.user_profile.address }}</p>
+            <p><strong>ชื่อป้าย:</strong> {{ order.name }}</p>
+            <p><strong>ขนาด:</strong> {{ order.get_category_display }}</p>
+            <p><strong>แบบป้าย:</strong> {{ order.get_material_display }}</p>
+            <p><strong>รายละเอียดเพิ่มเติม:</strong> {{ order.message }}</p>
+            <p><strong>ไฟล์งานเพิ่มเติม:</strong> {% if order.attachment %}<a href="{{ order.attachment.url }}">ดาวน์โหลดไฟล์</a>{% else %}ไม่มีไฟล์{% endif %}</p>
+            <p><strong>สถานะ:</strong> {{ order.get_status_display }}</p>
+        </div>
+    </div>
+</body>
+</html>

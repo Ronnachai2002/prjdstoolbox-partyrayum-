@@ -1,0 +1,33 @@
+
+
+  #topbar {
+    background-color: DarkGray;
+    overflow: hidden;
+    width: 100%;
+    position: relative; /* เพิ่ม position relative เพื่อให้สามารถกำหนด z-index ได้ */
+    z-index: 2; /* ตั้งค่า z-index ให้เป็นค่าที่ต่างกับ Slideshow Container */
+  }
+  
+  #topbar a {
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  #topbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  #topbar div {
+    float: right;
+  }
+  
+  #topbars div {
+    float: right;
+  }
+  

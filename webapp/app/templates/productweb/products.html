@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/products1.css' %}">
+    <title>ร้านบุญตา</title>
+</head>
+<body>
+    <div id="content" class="card-container">
+        {% for product in products %}
+            <div class="card">
+                {% if product.images.all %}
+                    <img src="{{ product.images.first.image.url }}" style="width:50%">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+                {% if user.is_superuser %}
+                    <p><a href="{% url 'delete_product' product.id %}">Delete</a></p>
+                {% endif %}
+                <h3><a href="{% url 'product' product.id %}">{{ product.title }}</a></h3>
+                <p class="price">{{ product.price }}</p>
+                <p>{{ product.size }}</p>
+                {% if user.is_authenticated %}
+                <button type="button" id="orderButton"><a href="{% url 'add_cart' product.id %}">เพิ่มไปตะกร้า</a></button>
+                {% else %}
+                <button type="button" onclick="redirectToLogin()">เพิ่มไปตะกร้า</button>
+                {% endif %}
+            </div>
+            <script>let currentImage = 0;
+
+                function redirectToLogin() {
+                  alert('กรุณาเข้าสู่ระบบเพื่อทำการสั่งซื้อ');
+                  window.location.href = '/login';
+                }
+                </script>
+        {% endfor %}
+        </script>
+    </div>
+</body>
+</html>

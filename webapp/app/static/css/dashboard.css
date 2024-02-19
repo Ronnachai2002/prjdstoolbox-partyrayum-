@@ -1,0 +1,12 @@
+/* dashboard.css */
+.order-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.order {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}

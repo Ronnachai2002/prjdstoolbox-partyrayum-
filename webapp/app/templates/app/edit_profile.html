@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขประวัติ</title>
+    <link rel="stylesheet" href="{% static 'css\edit_proflie.css' %}">
+</head>
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+    <br>
+    {% block content %}
+    <div class="profile-container">
+    <form method="post" enctype="multipart/form-data" action="{% url 'edit_profile' %}">
+        {% csrf_token %}
+        <h1>แก้ไขประวัติ</h1>
+        <p class="profile-info">ชื่อ : {{ form.first_name }}</p>
+        <p class="profile-info">นามสกุล : {{ form.last_name }}</p>
+        <p class="profile-info">email : {{ form.email }}</p>
+        <p class="profile-info">เบอร์โทรศัพท์ : {{ form.phone_number }}</p>
+        <p class="profile-info">ที่อยู่ : {{ form.address }}</p>     
+        <label for="day">วัน:</label>
+        <select id="day" name="day"></select>
+        <label for="month">เดือน:</label>
+        <select id="month" name="month"></select>
+        <label for="year">ปี:</label>
+        <select id="year" name="year"></select>
+        <br>
+        <br>
+        <button type="submit">บันทึก</button> 
+    </form>
+    <br>
+    <a href="{% url 'profile' %}"><button>กลับไปที่โปรไฟล์</button></a>
+    <script src="{% static 'js/edit.js' %}"></script>
+</div>
+{% endblock %}
+
+</body>
+</html>
+

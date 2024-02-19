@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'css/adminpage.css' %}">
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">หน้าหลัก</a>
+        <a href="{% url 'management' %}">จัดการผู้ใช้</a>
+        <a href="{% url 'admin_order_list' %}">รายการ Order</a>
+        <a href="{% url 'add_product' %}" >เพิมสินค้า</a>
+        <a href="{% url 'admin_chat' %}"><button>กล่องข้อความ</button></a>
+
+
+    </nav>
+    <section>
+        <h2>ยินดีต้อนรับสู่หน้า Admin</h2>
+        <p>นี่คือหน้าที่ใช้ในการจัดการระบบ</p>
+    </section>
+</body>
+</html>

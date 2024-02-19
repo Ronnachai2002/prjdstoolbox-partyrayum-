@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>รายการคำสั่งซื้อของผู้ดูแลระบบ</title>
+    <link rel="stylesheet" href="{% static 'css/orderlist.css' %}">
+</head>
+<body>
+    <nav>
+        <a href="{% url 'home' %}">หน้าหลัก</a>
+        <a href="{% url 'management' %}">จัดการผู้ใช้</a>
+        <a href="{% url 'admin_order_list' %}">รายการ Order</a>
+        <a href="#">อัพเดทสถานะ</a>
+    </nav>
+    <h1>รายการคำสั่งซื้อ</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>เลขที่คำสั่งซื้อ</th>
+                <th>ผู้ใช้</th>
+                <th>วันที่สั่งซื้อ</th>
+                <th>สถานะ</th>
+                <th>ไฟล์งานเพิ่มเติม</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.user_profile.user.username }}</td>
+                <td>{{ order.created_at }}</td>
+                <td>
+                    <form method="post" action="{% url 'update_order_status' order.id %}">
+                        {% csrf_token %}
+                        <select name="status">
+                            <option value="รอดำเนินการ" {% if order.status == 'รอดำเนินการ' %} selected {% endif %}>รอดำเนินการ</option>
+                            <option value="กำลังดำเนินการ" {% if order.status == 'กำลังดำเนินการ' %} selected {% endif %}>กำลังดำเนินการ</option>
+                            <option value="จัดส่งแล้ว" {% if order.status == 'จัดส่งแล้ว' %} selected {% endif %}>จัดส่งแล้ว</option>
+                            <option value="จัดส่งเรียบร้อย" {% if order.status == 'จัดส่งเรียบร้อย' %} selected {% endif %}>จัดส่งเรียบร้อย</option>
+                        </select>
+                        <button type="submit">อัพเดท</button>
+                    </form>
+                </td>
+                <td><a href="{% url 'view_order' order.id %}">ดูรายละเอียด</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

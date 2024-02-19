@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/registerXlogin.css' %}">
+    <title>Modern Login Page | AsmrProg</title>
+</head>
+<body>  
+    {% load static %}
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form method="post" action="/register">
+                {% csrf_token %}
+                <h1>สมัครสมาชิก</h1>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="ชื่อบัญชี" Required>
+                <label for="fname">ชื่อ</label>
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="ชื่อต้น" Required>
+                <label for="lname">นามสกุล</label>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="นามสกุล" Required>
+                <label for="email">อีเมลล์</label>
+                <input type="email" class="form-control" id="email" name="email"  Required>
+                <label for="pass1">รหัสผ่าน</label>
+                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Password" Required>
+                <button type="submit" class="btn btn-primary">สมัครสมาชิก</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form method="post" action="/login" class="mb-2">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h1>เข้าสู่ระบบ</h1>
+                    <br>
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username" Required>
+                </div>
+                <div class="form-group">
+                    <label for="pass1">รหัสผ่าน</label>
+                    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter Your Password" Required>
+                </div>
+                <button type="submit" class="btn btn-primary">ล็อกอิน</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    {% csrf_token %}
+                    <h1>กลับไปหน้าล็อกอิน</h1>
+                    <p>คลิ๊กที่ปุ่มล็อกอินข้างล้างเพื่อกลับไปหน้าล็อกอินได้</p>
+                    <button class="hidden" id="login">ล็อกอิน</button>
+                    <button class="hidden"><a style="color: aliceblue;" href="{% url 'home' %}">หน้าหลัก</a></button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    {% csrf_token %}
+                    <h1>สมัครสมาชิก</h1>
+                    <p>กดปุ่มสมัครสมาชิกเพื่อไปยังหน้าสมัครสมาชิกของเราได้</p>
+                    <button class="hidden" id="register">สมัครสมาชิก</button>  
+                    <button class="hidden"><a style="color: aliceblue;" href="{% url 'home' %}">หน้าหลัก</a></button>
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

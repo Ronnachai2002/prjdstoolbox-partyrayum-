@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/preorder1.css' %}">
+<title>รายการสั่งซื้อ</title>
+</head>
+
+<body>
+  {% include 'base/tab_login.html' %}
+  {% include 'app/components/site_header.html' %}
+  <div class="container">
+    <h1>รายการ Order</h1>
+    {% for order in orders %}
+    <div class="order-box">
+      <div class="order-details">
+        <div>
+          <label>เลขคำสั่งซื้อ:</label> <a href="{% url 'track_order' order.id %}">{{ order.id }}</a>
+        </div>
+        <div>
+          <label>เวลาสั่งซื้อ:</label> {{ order.created_at }}
+        </div>
+      </div>
+      <div class="order-details">
+        <div>
+          <label>ชื่อผู้สั่ง:</label> {{ order.user_profile.first_name }} {{ order.user_profile.last_name }}
+        </div>
+        <div>
+          <label>สถานะ:</label> {{ order.get_status_display }}
+        </div>
+      </div>
+      <div class="order-details">
+        <div>
+          <label>ชื่อป้าย:</label> {{ order.name }}
+        </div>
+        <div>
+          <label>ขนาด:</label> {{ order.get_category_display }}
+        </div>
+      </div>
+      <div class="order-details">
+        <div>
+          <label>รายละเอียดเพิ่มเติม:</label>
+          <div class="message-content">
+            {{ order.message }}
+          </div>
+        </div>
+      </div>
+      <div class="order-details">
+        <div>
+          <label>ไฟล์งานเพิ่มเติม:</label>
+          {% if order.attachment %}
+          <a href="{{ order.attachment.url }}">ดาวน์โหลด</a>
+          {% else %}
+          N/A
+          {% endif %}
+        </div>
+        <div>
+          <a class="status-button" href="{% url 'track_order' order.id %}">ดูสถานะ</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

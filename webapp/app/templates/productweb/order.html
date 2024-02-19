@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สั่งซื้อป้าย</title>
+<link rel="stylesheet" href="{% static 'css/order1.css' %}">
+</head>
+<body>
+  {% include 'base/tab_login.html' %}
+  {% include 'app/components/site_header.html' %}
+<div class="container">
+  <h2>ข้อมูลป้ายไวนิลที่จะสั่งทำ</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <label for="name">ชื่อป้ายที่ต้องการ:</label>
+    <input type="text" id="name" name="name" placeholder="ชื่อป้าย" required>
+
+    <label for="category">ขนาดป้าย:</label>
+    <select id="category" name="category">
+      <option value="A0">ไวนิล (841 x 1189 มิลลิเมตร)</option>
+      <option value="A1">ไวนิล (594 x 841 มิลลิเมตร)</option>
+      <option value="A2">ไวนิล (420 x 594 มิลลิเมตร)</option>
+      <option value="A3">ไวนิล (297 x 420 มิลลิเมตร)</option>
+      <option value="A4">ไวนิล (210 x 297 มิลลิเมตร)</option>      
+    </select>
+    
+
+    <label for="material">แบบป้าย:</label>
+    <select id="material" name="material">
+      <option value="Vinyl">ป้ายไวนิลธงญี่ปุ่น</option>
+      <option value="Acrylic">ป้ายไวนิลโครงไม้/โครงเหล็ก</option>
+      <option value="Metal">ป้ายกล่องไฟไวนิล</option>
+      <option value="Wood">สติกเกอร์อิงค์เจ็ท</option>
+      <option value="Foamboard">แคนวาสอิงค์เจ็ท</option>
+    </select>    
+
+    <label for="message">รายละเอียดป้ายเพิ่มเติม:</label>
+    <textarea id="message" name="message" placeholder="เพิ่มเติมเกี่ยวกับป้าย"></textarea>
+
+    <label for="attachment">Attachment:</label>
+    <input type="file" id="attachment" name="attachment">
+
+    <button type="submit">Order</button>
+    
+  </form>
+</div>
+<script src="{% static 'js/order1.js' %}"></script>
+</body>
+</html>

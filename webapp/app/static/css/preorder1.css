@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.order-box {
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.order-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.order-details label {
+  font-weight: bold;
+}
+
+.order-details a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.order-details a:hover {
+  text-decoration: underline;
+}
+
+.order-message {
+  margin-top: 10px;
+}
+
+.status-button {
+  background-color: white;
+  color: black;
+  padding: 8px 16px;
+  border: 1px solid black; /* Black border */
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.status-button:hover {
+  background-color: #f2f2f2; /* Light grey on hover */
+}

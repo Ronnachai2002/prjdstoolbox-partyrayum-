@@ -1,0 +1,41 @@
+.box {
+    width: 1016px;
+    height: 806px;
+}
+
+.box .group {
+    position: fixed;
+    width: 1026px;
+    height: 806px;
+    top: 0;
+    left: 0;
+}
+
+.box .div {
+    position: absolute;
+    top: 279px;
+    left: 139px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+

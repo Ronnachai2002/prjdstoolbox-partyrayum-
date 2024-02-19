@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สั่งซื้อป้าย</title>
+<link rel="stylesheet" href="{% static 'css/order1.css' %}">
+</head>
+<body>
+  {% include 'base/tab_login.html' %}
+  {% include 'app/components/site_header.html' %}
+<div class="container">
+  
+  <h2>ข้อมูลป้ายอักษรพลาสวูดที่จะสั่งทำ</h2>
+  <form>
+    <label for="name">ชื่อป้ายที่ต้องการ:</label>
+    <input type="text" id="name" name="name" placeholder="Your name">
+
+    <label for="category">ขนาดป้าย:</label>
+    <select id="category" name="category">
+      <option value="General">15 x 40 ซม.</option>
+      <option value="Inquiry">Inquiry</option>
+      <option value="Feedback">Feedback</option>
+    </select>
+
+    <label for="category">วัสดุป้าย:</label>
+    <select id="category" name="category">
+      <option value="General">General</option>
+      <option value="Inquiry">Inquiry</option>
+      <option value="Feedback">Feedback</option>
+    </select>
+
+    <label for="message">รายละเอียดป้ายเพิ่มเติม:</label>
+    <textarea id="message" name="message" placeholder="Your message"></textarea>
+
+    <label for="attachment">Attachment:</label>
+    <input type="file" id="attachment" name="attachment">
+
+    <button type="submit">Order</button>
+    
+  </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.order-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.order {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+}
+
+.order p {
+    margin: 5px 0;
+}
+
+/* Add more styles as needed */

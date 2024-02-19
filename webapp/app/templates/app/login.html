@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+    <div class="container">
+        <h3>เข้าสู่ระบบ</h3>
+        <form method="post" action="/login" class="mb-2">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your Username" required>
+            </div>
+            <div class="form-group">
+                <label for="pass1">รหัสผ่าน</label>
+                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter Your Password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">ล็อกอิน</button>
+        </form>
+    </div>
+</body>
+</html>
