@@ -53,8 +53,11 @@ urlpatterns = [
     path('orders/view/<int:order_id>/', views.view_order, name='view_order'),
     path('orders/track/<int:order_id>/', views.track_order, name='track_order'),
     path('delete_product/<int:product_id>/delete/', views.delete_product, name='delete_product'),
-    path('chat/', views.chat, name='chat'),
+    path('chat', views.chat, name='chat'),
     path('chat_history/<int:receiver_id>/', views.chat_history, name='chat_history'),
     path('send_message/', views.send_message, name='send_message'),
-    path('admin_chat/', views.admin_chat, name='admin_chat'),
+    path('admin_chat_list', views.admin_chat_list, name='admin_chat'),
+    path('admin_chat/<int:id>',views.admin_chat, name='delete_ScoreTopic'),
+    path('messages/admin/<int:id>', views.admin_messages, name='latest_messages'),
+    path('messages/customer/', views.customer_messages, name='latest_messages'),
 ]

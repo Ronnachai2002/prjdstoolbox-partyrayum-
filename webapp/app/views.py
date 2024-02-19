@@ -16,6 +16,7 @@ from .models import *
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.db import transaction
+from django.db.models import Q
 from django.utils import timezone
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.http import require_POST
@@ -348,10 +349,19 @@ def send_message(request):
 
 @login_required
 def chat(request):
-    # เรียกดูข้อความทั้งหมดที่ผู้ใช้เคยส่งไปและเป็นผู้รับหรือผู้ส่งเอง
-    messages = Message.objects.filter(sender=request.user.userprofile) | Message.objects.filter(receiver=request.user.userprofile)
+    user = UserProfile.objects.get(user=request.user)
+    if request.method == "POST":
+        admin = User.objects.filter(is_superuser=True)
+        if admin:
+            sender = UserProfile.objects.get(user=request.user)
+
+            admin = User.objects.filter(is_superuser=True).first()
+            receiver = UserProfile.objects.get(user=admin)
+
+            content = request.POST.get("content")
+            message = Message(sender=sender,receiver=receiver,content=content)
+            message.save()
     context = {
-        'messages': messages
     }
     return render(request, 'app/chat.html', context)
 
@@ -368,16 +378,40 @@ def chat_history(request, receiver_id):
 from django.contrib.auth.models import User
 
 @login_required
-def admin_chat(request):
-    admin_user = User.objects.get(is_staff=True)
-    admin_profile = admin_user.userprofile  # หา UserProfile ของแอดมิน
-    # เรียกดูข้อความทั้งหมดที่ผู้ใช้เคยส่งไปและเป็นผู้รับหรือผู้ส่งเอง
-    messages = Message.objects.filter(sender=request.user.userprofile, receiver=admin_profile) | \
-               Message.objects.filter(sender=admin_profile, receiver=request.user.userprofile)
+def admin_chat_list(request):
+    user = UserProfile.objects.get(user=request.user)
+    unique_sender_ids = Message.objects.filter(receiver=user).values_list('sender', flat=True).distinct()
+    unique_senders = UserProfile.objects.filter(id__in=unique_sender_ids)
     context = {
-        'messages': messages
+        'chat_list': unique_senders
     }
-    return render(request, 'app/admin_chat.html', context)
+    return render(request, 'admin/admin_chat_list.html', context)
 
+@login_required
+def admin_chat(request,id):
+    user = UserProfile.objects.get(user=request.user)
+    sender = UserProfile.objects.get(id=id)
+    if request.method == "POST":
+        content = request.POST.get("text")
+        message = Message(sender=user,receiver=sender,content=content)
+        message.save()
+    context = {
+        'sender' : sender,
+    }
+    return render(request, 'admin/admin_chat.html', context)
 
+def admin_messages(request,id):
+    user = UserProfile.objects.get(user=request.user)
+    sender = UserProfile.objects.get(id=id)
+    chat_list = Message.objects.filter(Q(sender=sender, receiver=user) | Q(sender=user, receiver=sender)).order_by('timestamp')
+    
+    messages_data = list(chat_list.values('id', 'sender__first_name', 'receiver__first_name', 'content', 'timestamp'))
+    return JsonResponse({'messages': messages_data})
+
+def customer_messages(request):
+    user = UserProfile.objects.get(user=request.user)
+    chat_list = Message.objects.filter(Q(receiver=user) | Q(sender=user)).order_by('timestamp')
+    
+    messages_data = list(chat_list.values('id', 'sender__first_name', 'receiver__first_name', 'content', 'timestamp'))
+    return JsonResponse({'messages': messages_data})
 ########                   ระบบแชท           ################
