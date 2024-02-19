@@ -56,6 +56,19 @@ class Message(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    
+class Payment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='payment_slips')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    is_verified = models.BooleanField(default=False)
+    status = models.CharField(max_length=50, choices=[
+        ('pending', 'รอตรวจสอบ'),
+        ('verified', 'ชำระเงินเรียบร้อย'),
+        ('rejected', 'การชำระเงินถูกปฏิเสธ')
+    ], default='pending')
+
+
+
 
     

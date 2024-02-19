@@ -1,0 +1,26 @@
+<!-- payment_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กรอกข้อมูลการชำระเงิน</title>
+</head>
+<body>
+    {% include 'admin/tab_admin.html' %}
+    <h1>กรอกข้อมูลการชำระเงิน</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="order_id">เลขคำสั่งซื้อ:</label>
+        <select name="order_id" id="order_id">
+            {% for order in orders %}
+                <option value="{{ order.id }}">{{ order.id }} - {{ order.user_profile.user.username }}</option>
+            {% endfor %}
+        </select>
+        <label for="amount_due">จำนวนเงินที่ต้องชำระ:</label>
+        <input type="number" name="amount_due" id="amount_due">
+        <br><br>
+        <button type="submit">ส่งใบแจ้งชำระเงิน</button>
+    </form>
+</body>
+</html>

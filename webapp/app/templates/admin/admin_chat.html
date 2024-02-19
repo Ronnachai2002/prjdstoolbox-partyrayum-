@@ -6,13 +6,8 @@
     <title>Admin Chat</title>
 </head>
 <body>
-    <nav>
-        <a href="{% url 'home' %}">หน้าหลัก</a>
-        <a href="{% url 'management' %}">จัดการผู้ใช้</a>
-        <a href="{% url 'admin_order_list' %}">รายการ Order</a>
-        <a href="{% url 'add_product' %}" >เพิมสินค้า</a>
-        <a href="/admin_chat_list">กล่องข้อความ</a>
-    </nav>
+    {% include 'admin/tab_admin.html' %}
+
     <h1>Admin Chat</h1>
     <div id="chat-container">
         <div id="messages"></div>

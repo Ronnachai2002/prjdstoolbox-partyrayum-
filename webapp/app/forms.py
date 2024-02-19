@@ -16,3 +16,7 @@ class ItemImageForm(forms.ModelForm):
     class Meta:
         model = ItemImage
         fields = ['image']
+
+class PaymentForm(forms.Form):
+    order_id = forms.IntegerField(label='เลขคำสั่งซื้อ')
+    amount_due = forms.DecimalField(label='จำนวนเงินที่ต้องชำระ')

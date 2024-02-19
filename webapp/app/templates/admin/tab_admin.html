@@ -1,0 +1,10 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/tab_admin.css' %}">
+<nav>
+    <a href="{% url 'home' %}"><button>หน้าหลัก</button></a>
+    <a href="{% url 'management' %}"><button>จัดการผู้ใช้</button></a>
+    <a href="{% url 'admin_order_list' %}"><button>รายการ Order</button></a>
+    <a href="{% url 'add_product' %}" ><button>เพิมสินค้า</button></a>
+    <a href="/admin_chat_list"><button>กล่องข้อความ</button></a>
+    <a href="{% url 'send_invoice' %}" ><button>รายการสลิป</button></a>
+</nav>

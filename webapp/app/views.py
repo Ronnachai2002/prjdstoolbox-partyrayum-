@@ -415,3 +415,33 @@ def customer_messages(request):
     messages_data = list(chat_list.values('id', 'sender__first_name', 'receiver__first_name', 'content', 'timestamp'))
     return JsonResponse({'messages': messages_data})
 ########                   ระบบแชท           ################
+
+@login_required
+def payment_tracking(request):
+    user_payments = Payment.objects.filter(user=request.user)
+    return render(request, 'app/payment_tracking.html', {'user_payments': user_payments})
+
+
+def send_payment_invoice(request):
+    orders = Order.objects.all()  # ดึงข้อมูลคำสั่งซื้อทั้งหมด
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            order_id = form.cleaned_data['order_id']
+            amount_due = form.cleaned_data['amount_due']
+            
+            # ดึงข้อมูลการสั่งซื้อ
+            order = Order.objects.get(id=order_id)
+            
+            payment_invoice = f"เลขคำสั่งซื้อ: {order.id}\n"
+            payment_invoice += f"ชื่อลูกค้า: {order.user_profile.user.username}\n"
+            payment_invoice += f"จำนวนเงินที่ต้องชำระ: {amount_due}\n"
+            
+    else:
+        form = PaymentForm()
+    return render(request, 'admin/payment_form.html', {'form': form, 'orders': orders})
+
+def view_user_payment_invoice(request, payment_id):
+    # Retrieve the payment object
+    payment = get_object_or_404(Payment, id=payment_id)
+    return render(request, 'app/user_payment_invoice.html', {'payment': payment})

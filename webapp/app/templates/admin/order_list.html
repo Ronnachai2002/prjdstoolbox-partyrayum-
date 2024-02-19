@@ -6,12 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/orderlist.css' %}">
 </head>
 <body>
-    <nav>
-        <a href="{% url 'home' %}">หน้าหลัก</a>
-        <a href="{% url 'management' %}">จัดการผู้ใช้</a>
-        <a href="{% url 'admin_order_list' %}">รายการ Order</a>
-        <a href="#">อัพเดทสถานะ</a>
-    </nav>
+    {% include 'admin/tab_admin.html' %}
     <h1>รายการคำสั่งซื้อ</h1>
     <table>
         <thead>
@@ -21,6 +16,7 @@
                 <th>วันที่สั่งซื้อ</th>
                 <th>สถานะ</th>
                 <th>ไฟล์งานเพิ่มเติม</th>
+                <th>ส่งใบชำระเงิน</th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +38,7 @@
                     </form>
                 </td>
                 <td><a href="{% url 'view_order' order.id %}">ดูรายละเอียด</a></td>
+                <td><a href="#" class="btn btn-primary">ส่งใบชำระเงิน</a></td>
             </tr>
             {% endfor %}
         </tbody>

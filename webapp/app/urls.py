@@ -60,4 +60,9 @@ urlpatterns = [
     path('admin_chat/<int:id>',views.admin_chat, name='delete_ScoreTopic'),
     path('messages/admin/<int:id>', views.admin_messages, name='latest_messages'),
     path('messages/customer/', views.customer_messages, name='latest_messages'),
+    path('payment-tracking/', payment_tracking, name='payment_tracking'),
+    path('send-invoice/', send_payment_invoice, name='send_invoice'),
+    path('user/payment_invoice/<int:payment_id>/', views.view_user_payment_invoice, name='view_user_payment_invoice'),
+
+
 ]

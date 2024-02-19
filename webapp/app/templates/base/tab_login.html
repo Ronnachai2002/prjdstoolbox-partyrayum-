@@ -10,6 +10,9 @@
             <a href="{% url 'cart' %}"  >Cart</a>
             <a href="{% url 'preorder' %}"  >order</a>
             <a href="/chat"  >Chat</a>
+            <a  href="{% url 'payment_tracking' %}">ติดตามการชำระเงิน</a>
+            
+
 
             
             {% if user.is_superuser %}

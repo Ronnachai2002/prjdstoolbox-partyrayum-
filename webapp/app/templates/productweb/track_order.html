@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ติดตามคำสั่งซื้อ</title>
 <link rel="stylesheet" href="{% static 'css/track.css' %}">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     {% include 'base/tab_login.html' %}
@@ -14,53 +13,8 @@
     <div class="container">
         <h1>ติดตามคำสั่งซื้อ</h1>
         <p><strong>สถานะการทำงาน:</strong> {{ order_status }}</p>
-        <p><strong>เลขคำสั่งซื้อ:</strong> {{ order.id }}</p>
-        <div id="chat-box">
-        </div>
-        <textarea id="message-input" placeholder="Type your message here..."></textarea>
-        <button id="send-btn">Send</button>    
+        <p><strong>เลขคำสั่งซื้อ:</strong> {{ order.id }}</p>  
         <a href="{% url 'view_order' order_id=order.id %}">ดูรายละเอียดคำสั่งซื้อ</a>
     </div>
 </body>
-<script>
-    $(document).ready(function(){
-        // Function to load chat messages
-        function loadMessages() {
-            $.ajax({
-                url: "/get_messages/",
-                type: "GET",
-                success: function(messages) {
-                    $('#chat-box').empty();
-                    messages.forEach(function(message) {
-                        $('#chat-box').append('<div><strong>' + message.user + '</strong>: ' + message.message + '</div>');
-                    });
-                }
-            });
-        }
-
-        // Initial load of messages
-        loadMessages();
-
-        // Function to send message
-        $('#send-btn').click(function(){
-            var message = $('#message-input').val();
-            $.ajax({
-                url: "/send_message/",
-                type: "POST",
-                data: {'message': message, csrfmiddlewaretoken: '{{ csrf_token }}'},
-                success: function(response) {
-                    if (response.status === 'success') {
-                        $('#message-input').val('');
-                        loadMessages(); // Reload messages after sending
-                    } else {
-                        alert('Failed to send message.');
-                    }
-                }
-            });
-        });
-
-        // Auto-refresh messages every 5 seconds
-        setInterval(loadMessages, 5000);
-    });
-</script>
 </html>

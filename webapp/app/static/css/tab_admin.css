@@ -1,0 +1,42 @@
+nav a {
+    color: #ffffff; /* สีของลิงค์ */
+    text-decoration: none; /* เอฟเฟกต์ของการเชื่อมโยง */
+    margin-right: 10px; /* ระยะห่างของลิงค์ */
+}
+
+/* สไตล์ของลิงค์ใน Navbar เมื่อโฮเวอร์ */
+nav a:hover {
+    color: #837272; /* สีของลิงค์เมื่อโฮเวอร์ */
+}
+
+/* สไตล์ของปุ่มใน Navbar */
+nav button {
+    background-color: #0084ff; /* สีพื้นหลังของปุ่ม */
+    color: #fff; /* สีของตัวอักษรของปุ่ม */
+    border: none; /* ขอบของปุ่ม */
+    padding: 8px 16px; /* ขนาดของปุ่ม */
+    border-radius: 5px; /* ทำให้มุมของปุ่มโค้ง */
+    cursor: pointer; /* เมาส์เป็นลูกศรเมื่อโฮเวอร์ */
+}
+
+/* สไตล์ของปุ่มใน Navbar เมื่อโฮเวอร์ */
+nav button:hover {
+    background-color: #0056b3; /* สีพื้นหลังของปุ่มเมื่อโฮเวอร์ */
+}
+
+
+/* สไตล์ของปุ่มส่งข้อความ */
+button[type='submit'] {
+    background-color: #0084ff; /* สีพื้นหลังของปุ่ม */
+    color: #fff; /* สีของตัวอักษรของปุ่ม */
+    border: none; /* ขอบของปุ่ม */
+    padding: 8px 16px; /* ขนาดของปุ่ม */
+    border-radius: 5px; /* ทำให้มุมของปุ่มโค้ง */
+    cursor: pointer; /* เมาส์เป็นลูกศรเมื่อโฮเวอร์ */
+}
+
+/* สไตล์ของปุ่มส่งข้อความเมื่อโฮเวอร์ */
+button[type='submit']:hover {
+    background-color: #0056b3; /* สีพื้นหลังของปุ่มเมื่อโฮเวอร์ */
+}
+

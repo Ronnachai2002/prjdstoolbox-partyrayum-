@@ -8,12 +8,8 @@
     <link rel="stylesheet" href="{% static 'css/adminpage.css' %}">
 </head>
 <body>
-    <nav>
-        <a href="{% url 'home' %}">หน้าหลัก</a>
-        <a href="{% url 'management' %}">จัดการผู้ใช้</a>
-        <a href="{% url 'admin_order_list' %}">รายการ Order</a>
-        <a href="#"><button>กล่องข้อความ</button></a>
-    </nav>
+    {% include 'admin/tab_admin.html' %}
+
     <br>
     <a href="{% url 'user_management' %}">User Management</a>
     
