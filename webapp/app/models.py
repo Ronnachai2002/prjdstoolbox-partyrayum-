@@ -70,5 +70,4 @@ class Payment(models.Model):
 
 
 
-
     

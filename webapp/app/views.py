@@ -445,3 +445,33 @@ def view_user_payment_invoice(request, payment_id):
     # Retrieve the payment object
     payment = get_object_or_404(Payment, id=payment_id)
     return render(request, 'app/user_payment_invoice.html', {'payment': payment})
+
+
+def create_payment(request,id):
+    order = get_object_or_404(Order, pk=id)
+    return render(request, 'admin/create_payment.html',{'order':order})
+
+def send_payment(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        orderid = request.POST.get('order_id')
+        user_profile = get_object_or_404(UserProfile, email=email)
+        order = get_object_or_404(Order, id=orderid)
+        user = user_profile.user
+        Payment.objects.create(user=user, order=order)
+    return render(request, 'admin/create_payment.html', {'order': order})
+
+
+def get_order_payment(request,id):
+    order = get_object_or_404(Order, pk=id)
+    order_payment = Payment.objects.get(order=order)
+    return render(request, 'productweb/get_order_payment.html',{'order': order_payment})
+
+
+def payment_slip(request):
+    if request.method == "POST":
+        file = request.FILES.get('file')
+        id = request.POST.get('order_id')
+        myorder = Payment.objects.get(pk=id)
+        myorder.image.save(file.name, file, save=True)
+        return redirect('preorder')

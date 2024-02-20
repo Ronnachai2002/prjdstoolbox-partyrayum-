@@ -11,3 +11,4 @@ class ItemAdmin(admin.ModelAdmin):
 admin.site.register(Item, ItemAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Message)
+admin.site.register(Payment)

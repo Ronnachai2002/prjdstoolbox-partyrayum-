@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'css/adminpage.css' %}">
+</head>
+<body>
+    {% include 'base/tab_login.html' %}
+    {% include 'app/components/site_header.html' %}
+
+    <section>
+        <h2>ส่งแจ้งการชำระ</h2>
+    </section>
+    <div>
+        <div style="display: flex; justify-content: flex-end; align-items: flex-start;">
+            <div style="flex: 1;">
+                <form action="{% url 'payment_slip' %}" method="post" enctype="multipart/form-data" style="max-width: 600px; /* Adjust based on your layout */">
+                    {% csrf_token %}
+                    ชื่อป้ายที่ต้องการ <input type="text" name="name" value="{{order.order.name}}" readonly><br>
+                    แบบป้าย <input type="text" name="get_material_display" value="{{order.order.get_material_display}}" readonly><br>
+                    ขนาดป้าย <input type="text" name="get_category_display" value="{{order.order.get_category_display}}" readonly><br>
+                    วัสดุ <input type="text" name="material" value="{{order.order.material}}" readonly><br>
+                    ราคา <input type="text" name="price" value="{{order.order.price}}" readonly><br>
+                    อีเมลล์ <input type="text" name="email" value="{{ order.order.user_profile.email }}" readonly><br>
+                    อัปโหลดหลักฐาน<input type="file" name="file" id="">
+                    <input type="text"  hidden name="order_id" value="{{ order.id }}" readonly><br>
+                    <button type="submit">ส่งใบชำระเงิน</button>
+                </form>
+            </div>
+            <div style="flex: 0 1 auto; margin-left: 20px; /* Adjust spacing as needed */">
+                <img src="https://www.gsb.or.th/gsb-theme/images/Sharing_Default.jpg" alt="รูปภาพ" style="width: 100px; height: auto;">
+                <p><strong>บัญชีธนาคาร:</strong> <span class="line-id">020005553350</span></p>
+                <p><strong>หมายเหตุ:</strong> <span class="context">ราคาสินค้าท่านจะได้รับหลังจากช่างทำการผลิตป้ายตามสั่งเสร็จแล้ว</span></p>
+            </div>
+        </div>
+    </div>
+    
+    
+
+</body>
+</html>

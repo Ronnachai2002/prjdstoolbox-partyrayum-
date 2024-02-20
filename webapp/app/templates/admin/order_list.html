@@ -38,7 +38,7 @@
                     </form>
                 </td>
                 <td><a href="{% url 'view_order' order.id %}">ดูรายละเอียด</a></td>
-                <td><a href="#" class="btn btn-primary">ส่งใบชำระเงิน</a></td>
+                <td><a href="{% url 'create_payment' order.id %}"" class="btn btn-primary">ส่งใบชำระเงิน</a></td>
             </tr>
             {% endfor %}
         </tbody>

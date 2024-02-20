@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{% static 'css/adminpage.css' %}">
+</head>
+<body>
+    {% include 'admin/tab_admin.html' %}
+
+    <section>
+        <h2>ส่งแจ้งการชำระ</h2>
+    </section>
+    <div>
+        <form action="{% url 'send_payment' %}" method="post">
+            {% csrf_token %}
+            ชื่อป้ายที่ต้องการ <input type="text" name="name" id="" value="{{order.name}}" readonly><br>
+            แบบป้าย <input type="text" name="get_material_display" id="" value="{{order.get_material_display}}" readonly><br>
+            ขนาดป้าย <input type="text" name="get_category_display" id="" value="{{order.get_category_display}}" readonly><br>
+            วัสดุ <input type="text" name="material" id="" value="{{order.material}}" readonly><br>
+            ราคา <input type="text" name="price" id="" value="{{order.price}}" readonly><br>
+            อีเมลล์ <input type="text" name="email" id="" value="{{ order.user_profile.email }}" readonly><br>
+            <input type="text" hidden name="order_id" id="" value="{{ order.id }}" readonly><br>
+            
+            <button type="submit">ส่งใบชำระเงิน</button>
+        </form>
+    </div>
+</body>
+</html>
