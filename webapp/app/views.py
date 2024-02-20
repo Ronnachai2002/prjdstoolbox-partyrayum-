@@ -422,44 +422,38 @@ def payment_tracking(request):
     return render(request, 'app/payment_tracking.html', {'user_payments': user_payments})
 
 
-def send_payment_invoice(request):
-    orders = Order.objects.all()  # ดึงข้อมูลคำสั่งซื้อทั้งหมด
-    if request.method == 'POST':
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            order_id = form.cleaned_data['order_id']
-            amount_due = form.cleaned_data['amount_due']
-            
-            # ดึงข้อมูลการสั่งซื้อ
-            order = Order.objects.get(id=order_id)
-            
-            payment_invoice = f"เลขคำสั่งซื้อ: {order.id}\n"
-            payment_invoice += f"ชื่อลูกค้า: {order.user_profile.user.username}\n"
-            payment_invoice += f"จำนวนเงินที่ต้องชำระ: {amount_due}\n"
-            
-    else:
-        form = PaymentForm()
-    return render(request, 'admin/payment_form.html', {'form': form, 'orders': orders})
-
-def view_user_payment_invoice(request, payment_id):
-    # Retrieve the payment object
-    payment = get_object_or_404(Payment, id=payment_id)
-    return render(request, 'app/user_payment_invoice.html', {'payment': payment})
-
-
 def create_payment(request,id):
     order = get_object_or_404(Order, pk=id)
     return render(request, 'admin/create_payment.html',{'order':order})
 
+from django.shortcuts import redirect, get_object_or_404
+
 def send_payment(request):
+    order = None
+    
     if request.method == "POST":
         email = request.POST.get('email')
-        orderid = request.POST.get('order_id')
-        user_profile = get_object_or_404(UserProfile, email=email)
-        order = get_object_or_404(Order, id=orderid)
-        user = user_profile.user
-        Payment.objects.create(user=user, order=order)
-    return render(request, 'admin/create_payment.html', {'order': order})
+        order_id = request.POST.get('order_id')
+        price = request.POST.get('price')
+        
+        try:
+            user_profile = UserProfile.objects.get(email=email)
+            order = Order.objects.get(id=order_id)
+            user = user_profile.user
+            payment = Payment.objects.create(user=user, order=order, price=price)
+            
+            # หากสร้างการชำระเงินสำเร็จ ทำการดึงใบชำระเงินใหม่
+            user_payments = Payment.objects.filter(user=user)
+            
+            # และ redirect ไปยังหน้าการติดตามการชำระเงินของผู้ใช้
+            return redirect('payment_tracking')
+        except UserProfile.DoesNotExist:
+            pass
+        
+    return redirect('admin1')
+
+
+
 
 
 def get_order_payment(request,id):
@@ -475,3 +469,14 @@ def payment_slip(request):
         myorder = Payment.objects.get(pk=id)
         myorder.image.save(file.name, file, save=True)
         return redirect('preorder')
+    
+
+@login_required
+def upload_payment_image(request, payment_id):
+    if request.method == 'POST':
+        payment = Payment.objects.get(pk=payment_id)
+        image_file = request.FILES.get('image')
+        if image_file:
+            payment.image = image_file
+            payment.save()
+    return redirect('payment_tracking')

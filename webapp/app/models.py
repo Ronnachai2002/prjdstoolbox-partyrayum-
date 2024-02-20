@@ -67,6 +67,9 @@ class Payment(models.Model):
         ('verified', 'ชำระเงินเรียบร้อย'),
         ('rejected', 'การชำระเงินถูกปฏิเสธ')
     ], default='pending')
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # เพิ่มฟิลด์ราคา
+
+
 
 
 

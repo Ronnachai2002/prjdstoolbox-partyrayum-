@@ -20,8 +20,7 @@
             แบบป้าย <input type="text" name="get_material_display" id="" value="{{order.get_material_display}}" readonly><br>
             ขนาดป้าย <input type="text" name="get_category_display" id="" value="{{order.get_category_display}}" readonly><br>
             วัสดุ <input type="text" name="material" id="" value="{{order.material}}" readonly><br>
-            ราคา <input type="text" name="price" id="" value="{{order.price}}" readonly><br>
-            อีเมลล์ <input type="text" name="email" id="" value="{{ order.user_profile.email }}" readonly><br>
+            ราคา <input type="text" name="price" id="" required><br>
             <input type="text" hidden name="order_id" id="" value="{{ order.id }}" readonly><br>
             
             <button type="submit">ส่งใบชำระเงิน</button>

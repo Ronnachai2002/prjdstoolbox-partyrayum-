@@ -94,25 +94,29 @@
         <tbody>
             {% for payment in user_payments %}
             <tr>
-                <td><img src="{{ payment.image.url }}" alt="Payment Slip" width="100"></td>
-                <td>{{ payment.order.user_profile }} - {{ payment.order.id }}</td>
-                <td class="status {{ payment.status }}">
-                    {% if payment.is_verified %}
-                        ชำระเงินเรียบร้อย
+                <td>
+                    {% if payment.image %}
+                    <img src="{{ payment.image.url }}" alt="Payment Slip" width="100">
                     {% else %}
-                        รอตรวจสอบ
+                    ยังไม่มีรูปใบเสร็จ
                     {% endif %}
                 </td>
+                <td>{{ payment.order.id }}</td>
+                <td class="status {{ payment.status }}">{{ payment.get_status_display }}</td>
                 <td>{{ payment.uploaded_at }}</td>
                 <td>
-                    {% if payment.is_verified %}
-                        ชำระเงินเรียบร้อย
+                    {% if not payment.is_verified %}
+                    <form action="{% url 'upload_payment_image' payment.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="upload-button">
+                            <label for="image-upload">อัพโหลดรูปใบเสร็จ</label>
+                            <input type="file" name="image" id="image-upload">
+                        </div>
+                    </form>
                     {% else %}
-                        รอตรวจสอบ
+                    <a href="{% url 'payment_detail' payment.order.id %}">ดูรายละเอียดการชำระเงิน</a>
                     {% endif %}
                 </td>
-
-
             </tr>
             {% endfor %}
         </tbody>

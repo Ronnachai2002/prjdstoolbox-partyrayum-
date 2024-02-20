@@ -61,12 +61,13 @@ urlpatterns = [
     path('messages/admin/<int:id>', views.admin_messages, name='latest_messages'),
     path('messages/customer/', views.customer_messages, name='latest_messages'),
     path('payment-tracking/', payment_tracking, name='payment_tracking'),
-    path('send-invoice/', send_payment_invoice, name='send_invoice'),
-    path('user/payment_invoice/<int:payment_id>/', views.view_user_payment_invoice, name='view_user_payment_invoice'),
     path('create_payment/<int:id>', create_payment, name='create_payment'),
     path('send_payment/', send_payment, name='send_payment'),
     path('get_order_payment/<int:id>', get_order_payment, name='get_order_payment'),
     path('payment_slip', payment_slip, name='payment_slip'),
+    path('upload_payment_image/<int:payment_id>/', views.upload_payment_image, name='upload_payment_image'),
+
+
 
 
 ]
