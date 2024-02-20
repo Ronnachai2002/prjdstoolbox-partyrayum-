@@ -465,8 +465,9 @@ def payment_slip(request):
 @login_required
 def upload_payment_image(request):
     if request.method == 'POST':
-        payment_id = request.POST.get('payment_id')
+        payment_id = request.POST.get('order_id')
         image_file = request.FILES.get('image')
+        print(image_file)
         if payment_id and image_file:
             try:
                 payment = Payment.objects.get(pk=payment_id)

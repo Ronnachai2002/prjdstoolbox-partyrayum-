@@ -65,7 +65,7 @@ urlpatterns = [
     path('send_payment/', send_payment, name='send_payment'),
     path('get_order_payment/<int:id>', get_order_payment, name='get_order_payment'),
     path('payment_slip/', views.payment_slip, name='payment_slip'),
-    path('upload_payment_image/<int:payment_id>/', views.upload_payment_image, name='upload_payment_image'),
+    path('upload_payment_image/', views.upload_payment_image, name='upload_payment_image'),
     path('update_payment_status/', views.update_payment_status, name='update_payment_status'),
     
 

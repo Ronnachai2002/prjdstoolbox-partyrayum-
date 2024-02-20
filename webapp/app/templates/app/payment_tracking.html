@@ -108,12 +108,14 @@
                 <td>{{ payment.price }}</td>
                 <td>
                     {% if not payment.is_verified %}
-                    <form action="{% url 'upload_payment_image' payment_id=payment.id %}" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'upload_payment_image'%}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="upload-button">
-                            <label for="image-upload">อัพโหลดรูปใบเสร็จ</label>
-                            <input type="file" name="image" id="image-upload">
+                        <div class="button">
+                            <input type="text" hidden name="order_id" id="" value="{{ payment.order.id }}">
+                            <input type="file" name="image" >
+                            <button type="submit">ยืนยันใบเสร็จ</button>
                         </div>
+                        
                     </form>
                     {% else %}
                     <a href="{% url 'payment_detail' payment.order.id %}">ดูรายละเอียดการชำระเงิน</a>
