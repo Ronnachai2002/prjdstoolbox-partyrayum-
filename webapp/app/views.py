@@ -418,7 +418,8 @@ def customer_messages(request):
 
 @login_required
 def payment_tracking(request):
-    user_payments = Payment.objects.filter(user=request.user)
+    user = UserProfile.objects.get(user=request.user)
+    user_payments = Payment.objects.filter(user=user)
     return render(request, 'app/payment_tracking.html', {'user_payments': user_payments})
 
 
@@ -432,23 +433,12 @@ def send_payment(request):
     order = None
     
     if request.method == "POST":
-        email = request.POST.get('email')
         order_id = request.POST.get('order_id')
         price = request.POST.get('price')
-        
-        try:
-            user_profile = UserProfile.objects.get(email=email)
-            order = Order.objects.get(id=order_id)
-            user = user_profile.user
-            payment = Payment.objects.create(user=user, order=order, price=price)
-            
-            # หากสร้างการชำระเงินสำเร็จ ทำการดึงใบชำระเงินใหม่
-            user_payments = Payment.objects.filter(user=user)
-            
-            # และ redirect ไปยังหน้าการติดตามการชำระเงินของผู้ใช้
-            return redirect('payment_tracking')
-        except UserProfile.DoesNotExist:
-            pass
+        order = Order.objects.get(id=order_id)
+        payment = Payment(user=order.user_profile,order=order,price=price)
+        payment.save()
+        return redirect('payment_tracking')
         
     return redirect('admin1')
 

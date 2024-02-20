@@ -57,7 +57,7 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
 class Payment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='payment_slips')
     uploaded_at = models.DateTimeField(auto_now_add=True)
