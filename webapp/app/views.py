@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,logout,login as auth_login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, HttpResponseRedirect , JsonResponse
+from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect , JsonResponse
 from django.template import RequestContext
 from django.db import IntegrityError
 from .models import *
@@ -443,30 +443,59 @@ def send_payment(request):
     return redirect('admin1')
 
 
-
-
-
 def get_order_payment(request,id):
     order = get_object_or_404(Order, pk=id)
     order_payment = Payment.objects.get(order=order)
     return render(request, 'productweb/get_order_payment.html',{'order': order_payment})
 
 
+@login_required
 def payment_slip(request):
     if request.method == "POST":
         file = request.FILES.get('file')
         id = request.POST.get('order_id')
-        myorder = Payment.objects.get(pk=id)
+        try:
+            myorder = Payment.objects.get(pk=id)
+        except Payment.DoesNotExist:
+            raise Http404("การชำระเงินที่คุณค้นหาไม่มีอยู่")  # หรือสามารถจัดการผิดพลาดได้อย่างอื่น
         myorder.image.save(file.name, file, save=True)
-        return redirect('preorder')
+        return redirect('payment_tracking')
     
 
 @login_required
-def upload_payment_image(request, payment_id):
+def upload_payment_image(request):
     if request.method == 'POST':
-        payment = Payment.objects.get(pk=payment_id)
+        payment_id = request.POST.get('payment_id')
         image_file = request.FILES.get('image')
-        if image_file:
-            payment.image = image_file
-            payment.save()
+        if payment_id and image_file:
+            try:
+                payment = Payment.objects.get(pk=payment_id)
+            except Payment.DoesNotExist:
+                raise Http404("ไม่พบการชำระเงินที่ระบุ")
+            else:
+                payment.image = image_file
+                payment.save()
     return redirect('payment_tracking')
+
+
+@login_required
+def update_payment_status(request):
+    if request.method == 'POST':
+        payment_id = request.POST.get('payment_id')
+        new_status = request.POST.get('status')
+        try:
+            payment = Payment.objects.get(pk=payment_id)
+        except Payment.DoesNotExist:
+            raise Http404("ไม่พบการชำระเงินที่ระบุ")
+        else:
+            payment.status = new_status
+            payment.save()
+            # ส่งกลับไปยังหน้าที่แสดงสถานะการชำระเงินของผู้ใช้
+            return redirect('payment_tracking')  # แก้จาก 'payment_list' เป็น 'payment_tracking'
+
+    # เรียกดูข้อมูลการชำระเงินทั้งหมด
+    payments = Payment.objects.all()
+    # ส่งข้อมูลการชำระเงินไปยังเทมเพลตเพื่อแสดงในหน้า HTML
+    return render(request, 'admin/payment_list.html', {'payments': payments})
+
+

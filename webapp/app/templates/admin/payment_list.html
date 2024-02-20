@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบชำระเงิน</title>
+</head>
+<body>
+    <h1>ใบชำระเงิน</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>รหัสผู้ใช้</th>
+                <th>รหัสการสั่งซื้อ</th>
+                <th>รูปภาพ</th>
+                <th>เวลาที่อัปโหลด</th>
+                <th>สถานะ</th>
+                <th>ราคา</th>
+                <th>อัปเดตสถานะ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+            <tr>
+                <td>{{ payment.user.user_id }}</td>
+                <td>{{ payment.order.order_id }}</td>
+                <td>
+                    {% if payment.image %}
+                        <img src="{{ payment.image.url }}" alt="payment slip" style="max-width: 100px;">
+                    {% else %}
+                        (ไม่มีรูปภาพ)
+                    {% endif %}
+                </td>
+                <td>{{ payment.uploaded_at }}</td>
+                <td>{{ payment.get_status_display }}</td>
+                <td>{{ payment.price }}</td>
+                <td>
+                    <form method="post" action="{% url 'update_payment_status' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="payment_id" value="{{ payment.id }}">
+                        <select name="status">
+                            <option value="pending" {% if payment.status == 'pending' %} selected {% endif %}>รอตรวจสอบ</option>
+                            <option value="verified" {% if payment.status == 'verified' %} selected {% endif %}>ชำระเงินเรียบร้อย</option>
+                            <option value="rejected" {% if payment.status == 'rejected' %} selected {% endif %}>การชำระเงินถูกปฏิเสธ</option>
+                        </select>
+                        <button type="submit">อัปเดต</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

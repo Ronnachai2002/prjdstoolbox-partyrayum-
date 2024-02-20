@@ -59,7 +59,7 @@ class Message(models.Model):
 class Payment(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='payment_slips')
+    image = models.ImageField(upload_to='payment_slips', null=True, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)
     status = models.CharField(max_length=50, choices=[

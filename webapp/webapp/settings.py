@@ -106,21 +106,8 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = BASE_DIR / "media"
 
-MEDIA_URL = 'productweb/media/'
 MEDIA_URL = 'app/media/'
 
 TIME_ZONE = 'Asia/Bangkok'
 
-# settings.py
-
-ASGI_APPLICATION = 'webapp.asgi.application'
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
 

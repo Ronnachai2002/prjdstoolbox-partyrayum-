@@ -88,6 +88,7 @@
                 <th>เลขคำสั่งซื้อ</th>
                 <th>สถานะ</th>
                 <th>วันที่อัปโหลด</th>
+                <th>ราคา</th>
                 <th>การดำเนินการ</th>
             </tr>
         </thead>
@@ -104,9 +105,10 @@
                 <td>{{ payment.order.id }}</td>
                 <td class="status {{ payment.status }}">{{ payment.get_status_display }}</td>
                 <td>{{ payment.uploaded_at }}</td>
+                <td>{{ payment.price }}</td>
                 <td>
                     {% if not payment.is_verified %}
-                    <form action="{% url 'upload_payment_image' payment.id %}" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'upload_payment_image' payment_id=payment.id %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="upload-button">
                             <label for="image-upload">อัพโหลดรูปใบเสร็จ</label>
