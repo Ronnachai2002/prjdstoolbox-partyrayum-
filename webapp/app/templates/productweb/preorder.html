@@ -25,7 +25,7 @@
       </div>
       <div class="order-details">
         <div>
-          <label>ชื่อผู้สั่ง:</label> {{ order.user_profile.first_name }} {{ order.user_profile.last_name }}
+          <label>ชื่อผู้สั่ง:</label> {{ order.user_profile.user.first_name }} {{ order.user_profile.user.last_name }}
         </div>
         <div>
           <label>สถานะ:</label> {{ order.get_status_display }}

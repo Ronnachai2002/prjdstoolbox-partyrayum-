@@ -26,26 +26,7 @@
         <p class="product-matter">{{ item.matter }}</p>
         <p class="product-description">{{ item.description }}</p>
         <p class="product-price">{{item.price}}</p>
-        
-        {% if user.is_authenticated %}
-    {% if item.title == "ป้ายกล่องไฟ" %}
-        <a id="checkout-link" href="{% url 'order2' %}"><button id="checkout-btn" onclick="orderProduct('{{ item.title }}')">สั่งซื้อ</button></a>
-    {% elif item.title == "ป้ายสติ๊กเกอร์" %}
-        <a id="checkout-link" href="{% url 'order3' %}"><button id="checkout-btn" onclick="orderProduct('{{ item.title }}')">สั่งซื้อ</button></a>
-    {% elif item.title == "ป้ายรีดฟิวเจอร์บอร์ด" %}
-        <a id="checkout-link" href="{% url 'order4' %}"><button id="checkout-btn" onclick="orderProduct('{{ item.title }}')">สั่งซื้อ</button></a>
-    {% elif item.title == "ป้ายอักษรพลาสวูด" %}
-        <a id="checkout-link" href="{% url 'order5' %}"><button id="checkout-btn" onclick="orderProduct('{{ item.title }}')">สั่งซื้อ</button></a>
-    {% elif item.title == "ป้ายรีดโฟมบอร์ด" %}
-        <a id="checkout-link" href="{% url 'order6' %}"><button id="checkout-btn" onclick="orderProduct('{{ item.title }}')">สั่งซื้อ</button></a>
-    {% elif item.title == "ป้ายไวนิล" %}
-        <a id="checkout-link" href="{% url 'order' %}"><button id="checkout-btn" onclick="orderProduct('{{ item.title }}')">สั่งซื้อ</button></a>
-    {% else %}
-        <a id="checkout-link" href="{% url 'order' %}"><button id="checkout-btn" onclick="orderProduct('{{ item.title }}')">สั่งซื้อ</button></a>
-    {% endif %}
-    {% else %}
     <button type="button" onclick="redirectToLogin()">สั่งซื้อ</button>
-    {% endif %}
         <script src="{% static 'js/detail.js' %}"></script>
     </div>
 </div>

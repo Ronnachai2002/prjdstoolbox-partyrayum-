@@ -5,11 +5,6 @@ function redirectToLogin() {
   window.location.href = '/login';
 }
 
-function orderButtonClicked() {
-  alert('กรุณาเข้าสู่ระบบเพื่อทำการสั่งซื้อ');
-  window.location.href = '/login';
-}
-
 function showImage(n) {
   const images = document.querySelectorAll('.product-image');
   currentImage += n;
@@ -44,19 +39,28 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-function orderProduct(productName) {
-  var checkoutLink = document.getElementById("checkout-link");
-  if (productName === "ป้ายกล่องไฟ") {
-      checkoutLink.setAttribute("href", "{% url 'order2' %}"); 
-  } else if (productName === "ป้ายสติ๊กเกอร์") {
-      checkoutLink.setAttribute("href", "{% url 'order3' %}");
-  } else if (productName === "ป้ายรีดฟิวเจอร์บอร์ด") {
-      checkoutLink.setAttribute("href", "{% url 'order4' %}");
-  } else if (productName === "ป้ายอักษรพลาสวูด") {
-      checkoutLink.setAttribute("href", "{% url 'order5' %}");
-  } else if (productName === "ป้ายรีดโฟมบอร์ด") {
-      checkoutLink.setAttribute("href", "{% url 'order6' %}");
-  } else if (productName === "ป้ายไวนิล") {
-      checkoutLink.setAttribute("href", "{% url 'order' %}");
+function orderProduct(productTitle) {
+  // ตรวจสอบว่าชื่อสินค้าเป็นอะไรและส่งไปยัง URL ที่ถูกต้อง
+  var orderUrl;
+  switch(productTitle) {
+      case "ป้ายกล่องไฟ":
+          orderUrl = "{% url 'order2' %}";
+          break;
+      case "ป้ายสติ๊กเกอร์":
+          orderUrl = "{% url 'order3' %}";
+          break;
+      case "ป้ายรีดฟิวเจอร์บอร์ด":
+          orderUrl = "{% url 'order4' %}";
+          break;
+      case "ป้ายอักษรพลาสวูด":
+          orderUrl = "{% url 'order5' %}";
+          break;
+      case "ป้ายรีดโฟมบอร์ด":
+          orderUrl = "{% url 'order6' %}";
+          break;
+      case "ป้ายไวนิล":
+      default:
+          orderUrl = "{% url 'order' %}";
   }
+  window.location.href = orderUrl;
 }

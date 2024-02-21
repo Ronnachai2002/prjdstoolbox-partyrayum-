@@ -1,16 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
     <title>ใบชำระเงิน</title>
 </head>
 <body>
+    {% include 'admin/tab_admin.html' %}
     <h1>ใบชำระเงิน</h1>
     <table>
         <thead>
             <tr>
-                <th>รหัสผู้ใช้</th>
+                <th>ชื่อบัญชีลูกค้า</th>
                 <th>รหัสการสั่งซื้อ</th>
                 <th>รูปภาพ</th>
                 <th>เวลาที่อัปโหลด</th>
@@ -22,8 +25,8 @@
         <tbody>
             {% for payment in payments %}
             <tr>
-                <td>{{ payment.user.user_id }}</td>
-                <td>{{ payment.order.order_id }}</td>
+                <td>{{ payment.user }}</td>
+                <td>{{ payment.order_id }}</td>
                 <td>
                     {% if payment.image %}
                         <img src="{{ payment.image.url }}" alt="payment slip" style="max-width: 100px;">

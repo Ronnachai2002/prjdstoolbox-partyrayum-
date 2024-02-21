@@ -289,7 +289,26 @@ def order(request):
 
 
 def order2(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        material = request.POST.get('material')
+        message = request.POST.get('message')
+        attachment = request.FILES.get('attachment')
+        
+        # บันทึกข้อมูลลงในฐานข้อมูล
+        order = Order.objects.create(
+            name=name,
+            category=category,
+            material=material,
+            message=message,
+            attachment=attachment
+        )
+        # ให้ redirect ไปยังหน้า "preorder.html" เพื่อแสดงรายการ Order ทั้งหมด
+        return redirect('preorder')
     return render(request, 'productweb/order2.html')
+
+
 def order3(request):
     return render(request, 'productweb/order3.html')
 def order4(request):
@@ -430,7 +449,6 @@ def create_payment(request,id):
 
 def send_payment(request):
     order = None
-    
     if request.method == "POST":
         order_id = request.POST.get('order_id')
         price = request.POST.get('price')
@@ -438,7 +456,6 @@ def send_payment(request):
         payment = Payment(user=order.user_profile,order=order,price=price)
         payment.save()
         return redirect('payment_tracking')
-        
     return redirect('admin1')
 
 
@@ -508,7 +525,7 @@ def update_payment_status(request):
             payment.status = new_status
             payment.save()
             # ส่งกลับไปยังหน้าที่แสดงสถานะการชำระเงินของผู้ใช้
-            return redirect('payment_tracking')  # แก้จาก 'payment_list' เป็น 'payment_tracking'
+            return redirect('payment_list')  # แก้จาก 'payment_list' เป็น 'payment_tracking'
 
     # เรียกดูข้อมูลการชำระเงินทั้งหมด
     payments = Payment.objects.all()

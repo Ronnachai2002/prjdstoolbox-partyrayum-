@@ -40,14 +40,16 @@ class Detailcart(models.Model):
 class Order(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=2, choices=[('A0', 'A0'), ('A1', 'A1'), ('A2', 'A2'), ('A3', 'A3'), ('A4', 'A4')])
-    material = models.CharField(max_length=50, choices=[('Vinyl', 'ป้ายไวนิลธงญี่ปุ่น'), ('Acrylic', 'ป้ายไวนิลโครงไม้/โครงเหล็ก'), ('Metal', 'ป้ายกล่องไฟไวนิล'), ('Wood', 'สติกเกอร์อิงค์เจ็ท'), ('Foamboard', 'แคนวาสอิงค์เจ็ท')])
+    category = models.CharField(max_length=50)  # ปรับขนาดเป็น CharField ให้สามารถเก็บขนาดไฟเป็นตัวหนังสือได้
+    material = models.CharField(max_length=50)
     message = models.TextField()
     attachment = models.FileField(upload_to='order_attachments', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=[('รอดำเนินการ', 'รอดำเนินการ'), ('กำลังดำเนินการ', 'กำลังดำเนินการ'), ('จัดส่งแล้ว', 'จัดส่งแล้ว'), ('จัดส่งเรียบร้อย', 'จัดส่งเรียบร้อย')])    
+
     def __str__(self):
         return f"Order {self.id}: {self.name} ({self.get_status_display()})"
+
     
 
 class Message(models.Model):
