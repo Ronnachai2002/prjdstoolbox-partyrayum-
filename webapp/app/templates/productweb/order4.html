@@ -13,22 +13,25 @@
 <div class="container">
   
   <h2>ข้อมูลป้ายรีดฟิวเจอร์บอร์ดที่จะสั่งทำ</h2>
-  <form>
-    <label for="name">ชื่อป้ายที่ต้องการ:</label>
-    <input type="text" id="name" name="name" placeholder="Your name">
+  <form method="post" enctype="multipart/form-data" id="form2" action="{% url 'order4' %}">
+    {% csrf_token %}
+    <label for="name">ชื่อป้ายรีดฟิวเจอร์ที่ต้องการ:</label>
+    <input type="text" id="name" name="name" placeholder="ชื่อป้าย">
 
     <label for="category">ขนาดป้าย:</label>
     <select id="category" name="category">
-      <option value="General">15 x 40 ซม.</option>
-      <option value="Inquiry">Inquiry</option>
-      <option value="Feedback">Feedback</option>
+      <option value="15x40">15 x 40 ซม.</option>
+      <option value="20x60">20 x 60 ซม.</option>
+      <option value="30x80">30 x 80 ซม.</option>
+      <option value="40x100">40 x 100 ซม.</option>
     </select>
-
-    <label for="category">วัสดุป้าย:</label>
-    <select id="category" name="category">
-      <option value="General">General</option>
-      <option value="Inquiry">Inquiry</option>
-      <option value="Feedback">Feedback</option>
+    
+    <label for="material">วัสดุป้าย:</label>
+    <select id="material" name="material">
+      <option value="Rigid_Foam_Board">กระดานโฟมแข็ง</option>
+      <option value="Corrugated_Plastic">พลาสติกคอร์รูเกท</option>
+      <option value="Aluminum">อลูมิเนียม</option>
+      <option value="Acrylic">อะคริลิค</option>
     </select>
 
     <label for="message">รายละเอียดป้ายเพิ่มเติม:</label>

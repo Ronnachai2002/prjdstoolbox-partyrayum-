@@ -288,44 +288,145 @@ def order(request):
     return render(request, 'productweb/order.html')
 
 
+@login_required
 def order2(request):
     if request.method == 'POST':
+        user_profile = request.user.userprofile  
         name = request.POST.get('name')
         category = request.POST.get('category')
         material = request.POST.get('material')
         message = request.POST.get('message')
         attachment = request.FILES.get('attachment')
+
+        status = 'รอดำเนินการ'
         
         # บันทึกข้อมูลลงในฐานข้อมูล
         order = Order.objects.create(
+            user_profile=user_profile,
             name=name,
             category=category,
             material=material,
             message=message,
-            attachment=attachment
+            attachment=attachment,
+            status=status 
         )
         # ให้ redirect ไปยังหน้า "preorder.html" เพื่อแสดงรายการ Order ทั้งหมด
         return redirect('preorder')
     return render(request, 'productweb/order2.html')
 
 
+@login_required
 def order3(request):
+    if request.method == 'POST':
+        user_profile = request.user.userprofile  
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        material = request.POST.get('material')
+        message = request.POST.get('message')
+        attachment = request.FILES.get('attachment')
+
+        status = 'รอดำเนินการ'
+
+        order = Order.objects.create(
+            user_profile=user_profile,
+            name=name,
+            category=category,
+            material=material,
+            message=message,
+            attachment=attachment,
+            status=status 
+        )
+        return redirect('preorder') 
+
     return render(request, 'productweb/order3.html')
+
+@login_required
 def order4(request):
+    if request.method == 'POST':
+        user_profile = request.user.userprofile  
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        material = request.POST.get('material')
+        message = request.POST.get('message')
+        attachment = request.FILES.get('attachment')
+
+        status = 'รอดำเนินการ'
+
+        order = Order.objects.create(
+            user_profile=user_profile,
+            name=name,
+            category=category,
+            material=material,
+            message=message,
+            attachment=attachment,
+            status=status 
+        )
+        return redirect('preorder') 
+
     return render(request, 'productweb/order4.html')
+
+@login_required
 def order5(request):
+    if request.method == 'POST':
+        user_profile = request.user.userprofile  
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        material = request.POST.get('material')
+        message = request.POST.get('message')
+        attachment = request.FILES.get('attachment')
+
+        status = 'รอดำเนินการ'
+
+        order = Order.objects.create(
+            user_profile=user_profile,
+            name=name,
+            category=category,
+            material=material,
+            message=message,
+            attachment=attachment,
+            status=status 
+        )
+        return redirect('preorder') 
+
     return render(request, 'productweb/order5.html')
+
+@login_required
 def order6(request):
+    if request.method == 'POST':
+        user_profile = request.user.userprofile  
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        material = request.POST.get('material')
+        message = request.POST.get('message')
+        attachment = request.FILES.get('attachment')
+
+        status = 'รอดำเนินการ'
+
+        order = Order.objects.create(
+            user_profile=user_profile,
+            name=name,
+            category=category,
+            material=material,
+            message=message,
+            attachment=attachment,
+            status=status 
+        )
+        return redirect('preorder') 
+
     return render(request, 'productweb/order6.html')
 
 @login_required
 def preorder(request, order_id=None):
+    
     if order_id:
+
         return redirect('track_order', order_id=order_id)
     else:
         current_user = request.user
         orders = Order.objects.filter(user_profile__user=current_user).order_by('-created_at')
         return render(request, 'productweb/preorder.html', {'orders': orders})
+    
+
 
 def delete_product_incart(request, product_id):
     cart_item = get_object_or_404(Detailcart, id=product_id)

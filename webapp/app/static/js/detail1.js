@@ -1,9 +1,5 @@
 let currentImage = 0;
 
-function redirectToLogin() {
-  alert('กรุณาเข้าสู่ระบบเพื่อทำการสั่งซื้อ');
-  window.location.href = '/login';
-}
 
 function showImage(n) {
   const images = document.querySelectorAll('.product-image');
