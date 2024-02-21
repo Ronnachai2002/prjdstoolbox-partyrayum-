@@ -67,6 +67,8 @@ urlpatterns = [
     path('payment_slip/', views.payment_slip, name='payment_slip'),
     path('upload_payment_image/', views.upload_payment_image, name='upload_payment_image'),
     path('update_payment_status/', views.update_payment_status, name='update_payment_status'),
+    path('delete_payment_image/<int:payment_id>/', views.delete_payment_image, name='delete_payment_image'),
+
     
 
 

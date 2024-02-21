@@ -90,6 +90,7 @@
                 <th>วันที่อัปโหลด</th>
                 <th>ราคา</th>
                 <th>การดำเนินการ</th>
+                <th>ลบใบเสร็จ</th>
             </tr>
         </thead>
         <tbody>
@@ -108,19 +109,28 @@
                 <td>{{ payment.price }}</td>
                 <td>
                     {% if not payment.is_verified %}
-                    <form action="{% url 'upload_payment_image'%}" method="post" enctype="multipart/form-data">
+                    <form action="{% url 'upload_payment_image' %}" method="post" enctype="multipart/form-data"> <!-- เพิ่ม enctype="multipart/form-data" -->
                         {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ payment.id }}">
                         <div class="button">
-                            <input type="text" hidden name="order_id" id="" value="{{ payment.order.id }}">
-                            <input type="file" name="image" >
+                            <input type="file" name="image"> <!-- ลบ attribute multiple -->
                             <button type="submit">ยืนยันใบเสร็จ</button>
                         </div>
-                        
                     </form>
                     {% else %}
                     <a href="{% url 'payment_detail' payment.order.id %}">ดูรายละเอียดการชำระเงิน</a>
                     {% endif %}
                 </td>
+                <td>
+                    {% if payment.image %}
+                    <img src="{{ payment.image.url }}" alt="Payment Slip" width="100">
+                    <br>
+                    <a href="{% url 'delete_payment_image' payment.id %}">ลบรูปภาพ</a>
+                    {% else %}
+                    ยังไม่มีรูปใบเสร็จ
+                    {% endif %}
+                </td>
+                
             </tr>
             {% endfor %}
         </tbody>

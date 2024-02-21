@@ -1,4 +1,5 @@
 import datetime
+import os
 from django.shortcuts import render, redirect 
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -427,8 +428,6 @@ def create_payment(request,id):
     order = get_object_or_404(Order, pk=id)
     return render(request, 'admin/create_payment.html',{'order':order})
 
-from django.shortcuts import redirect, get_object_or_404
-
 def send_payment(request):
     order = None
     
@@ -466,18 +465,35 @@ def payment_slip(request):
 def upload_payment_image(request):
     if request.method == 'POST':
         payment_id = request.POST.get('order_id')
-        image_file = request.FILES.get('image')
-        print(image_file)
-        if payment_id and image_file:
-            try:
+        image = request.FILES.get('image')  # ใช้ request.FILES.get() แทน request.FILES.getlist()
+        print("Payment ID:", payment_id)  # Debugging
+        print("Image File:", image)  # Debugging
+        if payment_id and image:  # ตรวจสอบว่ามี payment_id และไฟล์รูป
                 payment = Payment.objects.get(pk=payment_id)
-            except Payment.DoesNotExist:
-                raise Http404("ไม่พบการชำระเงินที่ระบุ")
-            else:
-                payment.image = image_file
-                payment.save()
+                payment.image = image  # กำหนดรูปใน Payment
+                payment.save()  # บันทึกการเปลี่ยนแปลง
+                return redirect('payment_tracking')
     return redirect('payment_tracking')
 
+
+@login_required
+def delete_payment_image(request, payment_id):
+    try:
+        payment = Payment.objects.get(pk=payment_id)
+        if payment.image:
+            # ลบรูปภาพจาก storage
+            if os.path.exists(payment.image.path):
+                os.remove(payment.image.path)
+            # ลบค่าฟิลด์รูปภาพในโมเดล Payment
+            payment.image = None
+            payment.save()
+            return redirect('payment_tracking')
+        else:
+            # ไม่มีรูปภาพในใบชำระนี้
+            return HttpResponse("ไม่มีรูปภาพในใบชำระนี้")
+    except Payment.DoesNotExist:
+        # ไม่พบใบชำระที่ระบุ
+        raise Http404("ไม่พบการชำระเงินที่ระบุ")
 
 @login_required
 def update_payment_status(request):
