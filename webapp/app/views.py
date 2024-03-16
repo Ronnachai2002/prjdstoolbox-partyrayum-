@@ -626,7 +626,7 @@ def update_payment_status(request):
             payment.status = new_status
             payment.save()
             # ส่งกลับไปยังหน้าที่แสดงสถานะการชำระเงินของผู้ใช้
-            return redirect('payment_list')  # แก้จาก 'payment_list' เป็น 'payment_tracking'
+            return redirect('payment_tracking')  # แก้จาก 'payment_list' เป็น 'payment_tracking'
 
     # เรียกดูข้อมูลการชำระเงินทั้งหมด
     payments = Payment.objects.all()

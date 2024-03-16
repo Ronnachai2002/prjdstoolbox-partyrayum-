@@ -42,10 +42,6 @@ nav button:hover {
 }
 
 
-
-
-
-/* สไตล์ของกล่องข้อความ */
 #messages {
     overflow-y: auto; /* เพื่อสร้างการเลื่อนเมื่อเกิดการส่งข้อความเพิ่ม */
     height: 300px; /* ความสูงของกล่องข้อความ */
@@ -92,3 +88,4 @@ button[type='submit']:hover {
 .show-chat #chat-display {
     display: block; /* เมื่อมีคลิกแสดงแชท */
 }
+

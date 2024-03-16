@@ -31,6 +31,7 @@
                         <select name="status">
                             <option value="รอดำเนินการ" {% if order.status == 'รอดำเนินการ' %} selected {% endif %}>รอดำเนินการ</option>
                             <option value="กำลังดำเนินการ" {% if order.status == 'กำลังดำเนินการ' %} selected {% endif %}>กำลังดำเนินการ</option>
+                            <option value="ดำเนินการเสร็จสิ้น" {% if order.status == 'ดำเนินการเสร็จสิ้น' %} selected {% endif %}>ดำเนินการเสร็จสิ้น</option>
                             <option value="จัดส่งแล้ว" {% if order.status == 'จัดส่งแล้ว' %} selected {% endif %}>จัดส่งแล้ว</option>
                             <option value="จัดส่งเรียบร้อย" {% if order.status == 'จัดส่งเรียบร้อย' %} selected {% endif %}>จัดส่งเรียบร้อย</option>
                         </select>

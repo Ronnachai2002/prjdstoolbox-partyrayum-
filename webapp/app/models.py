@@ -40,17 +40,15 @@ class Detailcart(models.Model):
 class Order(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=50)  # ปรับขนาดเป็น CharField ให้สามารถเก็บขนาดไฟเป็นตัวหนังสือได้
+    category = models.CharField(max_length=50)  
     material = models.CharField(max_length=50)
     message = models.TextField()
     attachment = models.FileField(upload_to='order_attachments', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, choices=[('รอดำเนินการ', 'รอดำเนินการ'), ('กำลังดำเนินการ', 'กำลังดำเนินการ'), ('จัดส่งแล้ว', 'จัดส่งแล้ว'), ('จัดส่งเรียบร้อย', 'จัดส่งเรียบร้อย')])    
+    status = models.CharField(max_length=50, choices=[('รอดำเนินการ', 'รอดำเนินการ'), ('กำลังดำเนินการ', 'กำลังดำเนินการ'), ('ดำเนินการเสร็จสิ้น', 'ดำเนินการเสร็จสิ้น'), ('จัดส่งแล้ว', 'จัดส่งแล้ว'), ('จัดส่งเรียบร้อย', 'จัดส่งเรียบร้อย')])    
 
     def __str__(self):
         return f"Order {self.id}: {self.name} ({self.get_status_display()})"
-
-    
 
 class Message(models.Model):
     sender = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='sent_messages')
