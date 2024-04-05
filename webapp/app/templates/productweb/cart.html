@@ -23,8 +23,8 @@
         <tbody>
             {% for item in cart %}
             <tr>
-                <td>{{ item.itemImages.item.title }}</td>
-                <td>{{ item.itemImages.item.price }}</td>
+                <td>{{ item.item_image.item.title }}</td>
+                <td>{{ item.item_image.item.price }}</td>
                 <td>{{ item.amount }}</td>
                 <td><input type="checkbox" name="selected_item" value="{{ item.id }}" onclick="limitCheckboxSelection(this)"></td>
                 <td>
@@ -34,6 +34,7 @@
                     </form>
                 </td>
             </tr>
+            
             {% endfor %}
         </tbody>
     </table>

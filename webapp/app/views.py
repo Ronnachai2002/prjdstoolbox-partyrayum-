@@ -214,34 +214,37 @@ def delete_product(request, product_id):
 def cart(req):
     try:
         user_profile = UserProfile.objects.get(user=req.user)
-        cart, created = Cart.objects.get_or_create(cart=user_profile)
+        cart_items = Cart.objects.filter(user_profile=user_profile)
         
-        cart_detail = Detailcart.objects.filter(carts=cart)
-        count = sum(detail.amount for detail in cart_detail)
+        # นับจำนวนสินค้าทั้งหมดในตะกร้า
+        count = sum(item.amount for item in cart_items)
         
-        context = {'count': count, 'cart': cart_detail}
+        context = {'count': count, 'cart': cart_items}
         return render(req, 'productweb/cart.html', context)
     except UserProfile.DoesNotExist:
         return render(req, 'app/no_profile.html')
 
 @login_required
 def add_cart(req, id):
-    products = ItemImage.objects.filter(item=id)
-    
     try:
         user_profile = UserProfile.objects.get(user=req.user)
-        cart, created = Cart.objects.get_or_create(cart=user_profile)
-        product_instance = products.first()
+        product_instance = ItemImage.objects.get(id=id)
+
+        # ตรวจสอบว่ามีรายการสินค้าในตะกร้าของผู้ใช้แล้วหรือยัง
+        cart = Cart.objects.filter(user_profile=user_profile, item_image=product_instance).first()
         
-        cart_detail = Detailcart.objects.create(
-            itemImages=product_instance,
-            carts=cart,
-            amount=1,
-        )
-        cart_detail.save()
+        # หากมีรายการสินค้าในตะกร้าอยู่แล้ว ให้เพิ่มจำนวนสินค้าในรายการนั้น
+        if cart:
+            cart.amount += 1
+            cart.save()
+        else:
+            # หากยังไม่มีรายการสินค้าในตะกร้า ให้สร้างรายการใหม่
+            Cart.objects.create(user_profile=user_profile, item_image=product_instance, amount=1)
+
         return HttpResponseRedirect(reverse('cart'))
     except UserProfile.DoesNotExist:
         pass
+
 
 def add_products(request, product_id):
     product_instance = Item.objects.get(id=product_id)
@@ -275,14 +278,6 @@ def order(request):
             attachment=attachment,
             status=status 
         )
-        try:
-            with transaction.atomic():
-                cart = Cart.objects.select_for_update().get(cart=user_profile)
-                cart_items = Detailcart.objects.filter(carts=cart)
-                cart_items.delete()
-                messages.success(request, 'Your order has been placed successfully!')
-        except Cart.DoesNotExist:
-            pass
         return redirect('preorder') 
 
     return render(request, 'productweb/order.html')
@@ -299,8 +294,7 @@ def order2(request):
         attachment = request.FILES.get('attachment')
 
         status = 'รอดำเนินการ'
-        
-        # บันทึกข้อมูลลงในฐานข้อมูล
+
         order = Order.objects.create(
             user_profile=user_profile,
             name=name,
@@ -429,7 +423,7 @@ def preorder(request, order_id=None):
 
 
 def delete_product_incart(request, product_id):
-    cart_item = get_object_or_404(Detailcart, id=product_id)
+    cart_item = get_object_or_404(Cart, id=product_id)
     if request.method == 'POST':
         cart_item.delete()
         return redirect('cart') 
