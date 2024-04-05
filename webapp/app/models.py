@@ -30,12 +30,14 @@ class ItemImage(models.Model):
     image = models.ImageField(upload_to='product_images', null=True, blank=True)
 
 class Cart(models.Model):
-    cart = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    item_image = models.ForeignKey(ItemImage, on_delete=models.CASCADE)
+    amount = models.IntegerField(default=1)
 
-class Detailcart(models.Model):
-    itemImages = models.ForeignKey(ItemImage, on_delete=models.CASCADE)
-    carts = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    amount = models.IntegerField()
+    def __str__(self):
+        return f"Cart for {self.user_profile.user.username}"
+
+
 
 class Order(models.Model):
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
